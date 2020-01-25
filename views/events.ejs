@@ -1,0 +1,61 @@
+<%- include('includes/head.ejs') %>    
+</head>
+<body>
+    <%- include('includes/navigation.ejs') %>
+    <div class="container my-5">
+        <h2>List of All Events</h2>
+
+        <div class="dropdown float-right">
+                <button class="btn btn-secondary dropdown-toggle"
+                        type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                  Add Event
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <a class="dropdown-item" href="/events/add/sync">Synchronous</a>
+                  <a class="dropdown-item" href="/events/add/async">Asynchronous</a>
+                  <a class="dropdown-item" href="/events/queued">Queued Data</a>
+                </div>
+              </div>
+
+        
+        <div class="clearfix"></div>
+        
+        <% if(eventsList.length >0) { %>
+            <table class="table my-3">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th>#</th>
+                        <th>Unique Key</th>
+                        <th>Title</th>
+                        <th>Venue</th>
+                        <th>Date</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                    <% for (let event of eventsList) { %>
+                        <tr>
+                            <th scope="row"><%= event.id %></th>
+                            <td><%= event.uniqueKey %></td>
+                            <td><%= event.title %></td>
+                            <td><%= event.venue %></td>
+                            <td><%= event.date %></td>
+                            <td>
+                              <a href="/events/<%= event.id %>" class="btn bg-primary text-white">More</a>
+                            </td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                  </table>
+                  <% } else { %>
+                    <h1 class="text-warning text-center">No Events IN Database</h1>
+                    <% } %>
+
+    </div>
+
+
+
+</body>
+</html>

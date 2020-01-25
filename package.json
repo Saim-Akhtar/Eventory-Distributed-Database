@@ -1,0 +1,29 @@
+{
+  "name": "node-distributed-database",
+  "version": "1.0.0",
+  "description": "distributed database on multiple servers using Node JS",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "distributed_database",
+    "ejs",
+    "mysql"
+  ],
+  "author": "Saim Akhtar",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "mysql2": "^2.0.2",
+    "sequelize": "^5.21.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

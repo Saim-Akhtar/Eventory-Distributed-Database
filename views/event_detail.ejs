@@ -1,0 +1,121 @@
+<%- include('includes/head.ejs') %>    
+</head>
+<body>
+    <%- include('includes/navigation.ejs') %>
+    <div class="container my-5">
+        <div class="dropdown float-right mx-3">
+            <button class="btn btn-info "
+                    type="button" data-toggle="modal"
+                    data-target="#modalEdit">
+              Edit Event
+            </button>
+            
+          </div>
+          <div class="dropdown float-right mx-3">
+            <button class="btn btn-danger "
+                    type="button" data-toggle="modal"
+                    data-target="#modalDelete">
+              Delete Event
+            </button>
+            
+          </div>
+  
+
+        <div class="clearfix"></div>
+        <h2><%= pageTitle %></h2>
+        <h6>Date: <%= event_date %></h6>
+        <h6>Venue: <%= event_venue %></h6>
+        <h6>Hash Key: <%= event_key %></h6>
+
+        <h3>Event Sponsors</h3>
+        <% if(event_sponsors.length >0) { %>
+            <table class="table my-3">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                    <% for (let es of event_sponsors) { %>
+                        <tr>
+                            <th scope="row"><%= es.id %></th>
+                            <td><%= es.name %></td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                  </table>
+                  <% } else { %>
+                    <h1 class="text-warning text-center">No Sponsors for this event Yet</h1>
+                    <% } %>
+    </div>
+
+<!-- Edit Modal -->
+<div class="modal" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenteredLabel">Edit</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="/events/update/<%= event_id %>" method="POST">
+                <input type="text" name="uniqueKey" value="<%= event_key %>" class="sr-only">
+                  <div class="form-group">
+                    <label for="title">Event Title</label>
+                    <input type="text" class="form-control" id="title" name="title"value="<%= pageTitle %>">
+                  </div>
+                  <div class="form-group">
+                    <label for="date">Event Date</label>
+                    <input type="date" class="form-control" id="date" name="date" value="<%= event_date %>">
+                  </div>
+                  <div class="custom-control custom-switch form-group">
+                    <input type="checkbox" name="async_mode" class="custom-control-input" data-toggle="toggle" id="updateSwitch">
+                    <label class="custom-control-label" for="updateSwitch">Asynchronous Mode</label>
+                  </div>
+                
+                <button type="submit" class="btn btn-primary mb-2" >Update</button>
+            </form>
+            </div>
+            
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Delete Modal -->
+<div class="modal" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenteredLabel">Are You sure you want to delete this Event?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="/events/delete/<%= event_id %>" method="POST">
+            <input type="text" class="sr-only" name="uniqueKey" value="<%= event_key %>">
+            <div class="custom-control custom-switch form-group">
+                <input type="checkbox" name="async_mode" class="custom-control-input" data-toggle="toggle" id="customSwitch1">
+                <label class="custom-control-label" for="customSwitch1">Asynchronous Mode</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Yes, Delete</button>
+            </form>
+            </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>

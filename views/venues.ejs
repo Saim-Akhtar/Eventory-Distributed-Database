@@ -1,0 +1,104 @@
+<%- include('includes/head.ejs') %>    
+</head>
+<body>
+    <%- include('includes/navigation.ejs') %>
+    <div class="container my-5">
+        <h2>List of All Venues</h2>
+
+        <div class="dropdown float-right">
+          <button class="btn btn-secondary "
+                  type="button" data-toggle="modal"
+                  data-target="#modalAdd">
+            Add Venue
+          </button>
+        </div>
+        
+<!-- Modal -->
+<div class="modal" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenteredLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/venues/add" method="POST">
+          <div class="form-group">
+              <label for="title">Enter Venue Name</label>
+              <input type="text" class="form-control" name="title" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="address">Enter Venue Address</label>
+              <input type="text" class="form-control" name="address" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="title">Enter Venue Rating</label>
+              <input type="number" max="5" min="1" class="form-control" name="rating" placeholder="">
+            </div>
+            <div class="form-group">
+            <select class="custom-select" name="city">
+              <option selected disabled>Select City</option>
+              <% for (let city of citiesList) { %>
+              <option value="<%= city.id %>"><%= city.name %></option>
+              <% } %>
+            </select>
+          </div>
+          
+          <button type="submit" class="btn btn-primary mb-2" >Insert Venue</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        <div class="clearfix"></div>
+        
+        <% if(venuesList.length >0) { %>
+            <table class="table my-3">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th>#</th>
+                        <th>Unique Key</th>
+                        <th>Title</th>
+                        <th>Address</th>
+                        <th>Rating</th>
+                        <th>City</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                    <% for (let venue of venuesList) { %>
+                        <tr>
+                            <th scope="row"><%= venue.id %></th>
+                            <td><%= venue.uniqueKey %></td>
+                            <td><%= venue.title %></td>
+                            <td><%= venue.address %></td>
+                            <td><%= venue.rating %></td>
+                            <td><%= venue.city %></td>
+                            <td>
+                              <form class="form-inline" action="/venues/delete/<%= venue.id %>" method="POST">
+                                <input type="text" class="sr-only" name="uniqueKey" value="<%= venue.uniqueKey%>">
+                                <button type="submit" class="btn bg-danger text-white">Delete</button>
+                              </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                  </table>
+                  <% } else { %>
+                    <h1 class="text-warning text-center">No Venues IN Database</h1>
+                    <% } %>
+
+    </div>
+
+
+
+</body>
+</html>

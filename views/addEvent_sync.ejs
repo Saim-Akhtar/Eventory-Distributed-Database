@@ -1,0 +1,45 @@
+<%- include('includes/head.ejs') %>    
+</head>
+<body>
+    <%- include('includes/navigation.ejs') %>
+    <div class="container my-5">
+        <h2>Add An Event</h2>
+
+        <div class="container">
+            <form action="/events/add/sync" method="POST">
+                <div class="form-group">
+                    <label for="title">Event Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <select class="custom-select" name="venue">
+                      <option selected disabled>Select Venue</option>
+                      <% for (let venue of venuesList) { %>
+                      <option value="<%= venue.id %>"><%= venue.title %></option>
+                      <% } %>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    Add Sponsor: 
+                    <select class="selectpicker" multiple data-live-search="true" name="sponsor">
+                      <% for (let s of sponsorsList) { %>
+                      <option value="<%= s.id %>"><%= s.name %></option>
+                      <% } %>
+                    </select>
+                  </div>
+                <div class="form-group">
+                  <label for="date">Event Date</label>
+                  <input type="date" class="form-control" id="date" name="date" placeholder="">
+                </div>
+                
+                <button type="submit" class="btn btn-primary mb-2">Add Synchonously</button>
+
+              </form>
+              
+        </div>
+    </div>
+
+
+
+</body>
+</html>

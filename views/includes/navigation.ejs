@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg fixed-left navbar-light bg-primary">
+  <a class="navbar-brand" href="/">Eventory</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto font-weight-bold">
+      <li class="nav-item <%= path=='/events' ? 'active':'' %>">
+        <a class="nav-link" href="/events">Events</a>
+      </li>
+      <li class="nav-item <%= path=='/queued' ? 'active':'' %>">
+        <a class="nav-link" href="/queued">Queued Data</a>
+      </li>
+      <li class="nav-item <%= path=='/cities' ? 'active':'' %>">
+        <a class="nav-link" href="/cities">Cities</a>
+      </li>
+      <li class="nav-item <%= path=='/venues' ? 'active':'' %>">
+        <a class="nav-link" href="/venues">Venues</a>
+      </li>
+      <li class="nav-item <%= path=='/sponsors' ? 'active':'' %>">
+        <a class="nav-link" href="/sponsors">Sponsors</a>
+      </li>
+
+    </ul>
+
+
+
+
+  </div>
+</nav>
